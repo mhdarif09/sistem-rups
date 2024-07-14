@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller; // Import the base Controller class
 use Illuminate\Http\Request;
-use App\Models\Admin1; // Pastikan Anda menggunakan namespace yang benar untuk model Admin1
+use App\Models\Admin1; // Make sure you use the correct namespace for the Admin1 model
 
 class Admin1Controller extends Controller
 {
@@ -58,12 +59,13 @@ class Admin1Controller extends Controller
         return redirect()->route('admin.adminlevel1.index')
             ->with('success', 'Data Arahan RUPS berhasil diperbarui.');
     }
-    public function destroy($id)
-{
-    $admin1 = Admin1::findOrFail($id);
-    $admin1->delete();
 
-    return redirect()->route('admin.adminlevel1.index')
-        ->with('success', 'Data Arahan RUPS berhasil dihapus.');
-}
+    public function destroy($id)
+    {
+        $admin1 = Admin1::findOrFail($id);
+        $admin1->delete();
+
+        return redirect()->route('admin.adminlevel1.index')
+            ->with('success', 'Data Arahan RUPS berhasil dihapus.');
+    }
 }

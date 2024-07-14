@@ -25,22 +25,43 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
-                        <!-- Menu kiri - belum ada -->
+                        <!-- Left Side Menu - Empty -->
                     </ul>
 
                     <ul class="navbar-nav ms-auto">
-                        <!-- Menu kanan - Authentication Links -->
- <!-- Link Approve Users -->
- <li class="nav-item">
-    <a class="nav-link" href="{{ route('admin.adminlevel1.index') }}">
-        Arahan RUPS
-    </a>
- </li>
- <li class="nav-item">
-    <a class="nav-link" href="{{ route('admin.users.index') }}">Approve Users</a>
-</li>                           
-                            <!-- Menu untuk user yang sudah login -->
+                        <!-- Right Side Menu - Authentication Links -->
+                        @auth
+                            @if (Auth::user()->hasRole('admin1'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.adminlevel1.index') }}">
+                                        Arahan RUPS
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->hasRole('user1'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('user.userlevel1.index') }}">
+                                        Arahan RUPS
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->hasRole('super_admin'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.users.index') }}">Approve Users</a>
+                                </li>
+                            @endif
+                        @endauth
+                        @guest
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
@@ -51,8 +72,12 @@
                                     </a>
                                     <!-- Divider -->
                                     <div class="dropdown-divider"></div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
+                        @endguest
                     </ul>
                 </div>
             </div>
