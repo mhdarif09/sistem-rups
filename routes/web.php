@@ -6,7 +6,12 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DivisionController; 
 use App\Http\Controllers\Admin\Admin1Controller;
-use App\Http\Controllers\User\UserLevel1Controller; // Ensure correct namespace for UserLevel1Controller
+use App\Http\Controllers\User\UserLevel1Controller; 
+use App\Http\Controllers\Admin\Admin2Controller;
+use App\Http\Controllers\Admin\Admin3Controller;
+use App\Http\Controllers\Admin\Admin4Controller;
+use App\Http\Controllers\Admin\Admin5Controller;
+// Ensure correct namespace for UserLevel1Controller
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +53,33 @@ Route::middleware(['auth', 'role:admin1'])->group(function () {
     Route::get('/admin/adminlevel1/{id}/edit', [Admin1Controller::class, 'edit'])->name('admin.adminlevel1.edit');
     Route::put('/admin/adminlevel1/{id}', [Admin1Controller::class, 'update'])->name('admin.adminlevel1.update');
     Route::delete('/admin/adminlevel1/{id}', [Admin1Controller::class, 'destroy'])->name('admin.adminlevel1.destroy');
+});
+
+Route::middleware(['auth', 'role:admin2'])->group(function () {
+    Route::get('/admin/adminlevel2', [Admin2Controller::class, 'index'])->name('admin.adminlevel2.index');
+    Route::put('/admin/adminlevel2/{id}/approve', [Admin2Controller::class, 'approve'])->name('admin.adminlevel2.approve');
+    Route::get('/admin/adminlevel2/{id}/edit', [Admin2Controller::class, 'edit'])->name('admin.adminlevel2.edit');
+    Route::put('/admin/adminlevel2/{id}', [Admin2Controller::class, 'update'])->name('admin.adminlevel2.update');
+});
+
+
+Route::middleware(['auth', 'role:admin3'])->group(function () {
+    Route::get('/admin/adminlevel3', [Admin3Controller::class, 'index'])->name('admin.adminlevel3.index');
+    Route::put('/admin/adminlevel3/{id}/approve', [Admin3Controller::class, 'approve'])->name('admin.adminlevel3.approve');
+    Route::put('/admin/adminlevel3/{id}', [Admin3Controller::class, 'update'])->name('admin.adminlevel3.update');
+});
+
+Route::middleware(['auth', 'role:admin4'])->group(function () {
+    Route::get('/admin/adminlevel4', [Admin4Controller::class, 'index'])->name('admin.adminlevel4.index');
+    Route::put('/admin/adminlevel4/{id}/approve', [Admin4Controller::class, 'approve'])->name('admin.adminlevel4.approve');
+    Route::put('/admin/adminlevel4/{id}', [Admin4Controller::class, 'update'])->name('admin.adminlevel4.update');
+});
+
+Route::middleware(['auth', 'role:admin5'])->group(function () {
+    Route::get('/admin/adminlevel5', [Admin5Controller::class, 'index'])->name('admin.adminlevel5.index');
+    Route::put('/admin/adminlevel5/{id}/approve', [Admin5Controller::class, 'approve'])->name('admin.adminlevel5.approve');
+    Route::put('/admin/adminlevel5/{id}/mark-complete', [Admin5Controller::class, 'markComplete'])->name('admin.adminlevel5.markComplete');
+    Route::put('/admin/adminlevel5/{id}', [Admin5Controller::class, 'update'])->name('admin.adminlevel5.update');
 });
 
 Route::middleware(['auth', 'role:user1'])->group(function () {

@@ -34,14 +34,42 @@
                             @if (Auth::user()->hasRole('admin1'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.adminlevel1.index') }}">
-                                        Arahan RUPS
+                                        Arahan RUPS (Admin Level 1)
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->hasRole('admin2'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.adminlevel2.index') }}">
+                                        Arahan RUPS (Admin Level 2)
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->hasRole('admin3'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.adminlevel3.index') }}">
+                                        Arahan RUPS (Admin Level 3)
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->hasRole('admin4'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.adminlevel4.index') }}">
+                                        Arahan RUPS (Admin Level 4)
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->hasRole('admin5'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.adminlevel5.index') }}">
+                                        Arahan RUPS (Admin Level 5)
                                     </a>
                                 </li>
                             @endif
                             @if (Auth::user()->hasRole('user1'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('user.userlevel1.index') }}">
-                                        Arahan RUPS
+                                        Arahan RUPS (User Level 1)
                                     </a>
                                 </li>
                             @endif
@@ -50,6 +78,20 @@
                                     <a class="nav-link" href="{{ route('admin.users.index') }}">Approve Users</a>
                                 </li>
                             @endif
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                         @endauth
                         @guest
                             <li class="nav-item">
@@ -60,23 +102,6 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <!-- Submenu -->
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <!-- Divider -->
-                                    <div class="dropdown-divider"></div>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
                         @endguest
                     </ul>
                 </div>
