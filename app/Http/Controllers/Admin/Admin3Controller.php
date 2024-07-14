@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin1;
 
-class Admin2Controller extends Controller
+class Admin3Controller extends Controller
 {
     public function index()
     {

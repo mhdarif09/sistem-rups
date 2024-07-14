@@ -73,6 +73,21 @@
                                     </a>
                                 </li>
                             @endif
+                            @if (Auth::user()->hasRole('user2'))
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('user.userlevel2.index') }}">
+            Arahan RUPS (User Level 2)
+        </a>
+    </li>
+@endif
+
+                            @if (Auth::user()->hasRole('user3'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('user.userlevel3.index') }}">
+                                        Arahan RUPS (User Level 3)
+                                    </a>
+                                </li>
+                            @endif
                             @if (Auth::user()->hasRole('super_admin'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.users.index') }}">Approve Users</a>

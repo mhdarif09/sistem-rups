@@ -4,13 +4,15 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin1; // Assuming you're using the Admin1 model
+use App\Models\Admin1;
 
 class UserLevel1Controller extends Controller
 {
     public function index()
     {
-        $admin1Data = Admin1::all();
+        $admin1Data = Admin1::where('approved_by_user2', false)
+                            ->where('approved_by_user3', false)
+                            ->get();
         return view('user.userlevel1.index', compact('admin1Data'));
     }
 
@@ -24,8 +26,6 @@ class UserLevel1Controller extends Controller
     {
         $validatedData = $request->validate([
             'Hasil_tindak_lanjut' => 'nullable|string',
-            'Status' => 'required|string|in:Belum ditindak lanjut,Sudah ditindak lanjut',
-            'Keterangan' => 'nullable|string',
             'Bukti' => 'nullable|string',
         ]);
 
@@ -33,6 +33,6 @@ class UserLevel1Controller extends Controller
         $admin1->update($validatedData);
 
         return redirect()->route('user.userlevel1.index')
-            ->with('success', 'Data Arahan RUPS berhasil diperbarui.');
+            ->with('success', 'Data Arahan RUPS berhasil diperbarui dan menunggu persetujuan.');
     }
 }

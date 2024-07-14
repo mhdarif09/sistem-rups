@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Arahan Rups</h1>
+<h1>Arahan RUPS</h1>
 
 <a href="{{ route('admin.adminlevel1.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
 
@@ -10,9 +10,9 @@
         <tr>
             <th>Arahan</th>
             <th>PIC</th>
-            <th>Hasil Tindak Lanjut</th>
             <th>Status</th>
             <th>Keterangan</th>
+            <th>Hasil Tindak Lanjut</th>
             <th>Bukti</th>
             <th>Actions</th>
         </tr>
@@ -22,12 +22,26 @@
             <tr>
                 <td>{{ $data->Arahan }}</td>
                 <td>{{ $data->PIC }}</td>
-                <td>{{ $data->Hasil_tindak_lanjut }}</td>
                 <td>{{ $data->Status }}</td>
                 <td>{{ $data->Keterangan }}</td>
-                <td>{{ $data->Bukti }}</td>
                 <td>
-                    <a href="{{ route('admin.adminlevel1.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    @if ($data->approved_by_user2 && $data->approved_by_user3)
+                        {{ $data->Hasil_tindak_lanjut }}
+                    @else
+                        -
+                    @endif
+                </td>
+                <td>
+                    @if ($data->approved_by_user2 && $data->approved_by_user3)
+                        {{ $data->Bukti }}
+                    @else
+                        -
+                    @endif
+                </td>
+                <td>
+                    @if ($data->approved_by_user2 && $data->approved_by_user3)
+                        <a href="{{ route('admin.adminlevel1.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    @endif
                     <form action="{{ route('admin.adminlevel1.destroy', $data->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')

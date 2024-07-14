@@ -6,11 +6,14 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DivisionController; 
 use App\Http\Controllers\Admin\Admin1Controller;
-use App\Http\Controllers\User\UserLevel1Controller; 
 use App\Http\Controllers\Admin\Admin2Controller;
 use App\Http\Controllers\Admin\Admin3Controller;
 use App\Http\Controllers\Admin\Admin4Controller;
 use App\Http\Controllers\Admin\Admin5Controller;
+use App\Http\Controllers\User\UserLevel1Controller; 
+use App\Http\Controllers\User\UserLevel2Controller;
+use App\Http\Controllers\User\UserLevel3Controller;
+
 // Ensure correct namespace for UserLevel1Controller
 
 /*
@@ -82,8 +85,26 @@ Route::middleware(['auth', 'role:admin5'])->group(function () {
     Route::put('/admin/adminlevel5/{id}', [Admin5Controller::class, 'update'])->name('admin.adminlevel5.update');
 });
 
-Route::middleware(['auth', 'role:user1'])->group(function () {
-    Route::get('/user/userlevel1', [UserLevel1Controller::class, 'index'])->name('user.userlevel1.index');
-    Route::get('/user/userlevel1/{id}/edit', [UserLevel1Controller::class, 'edit'])->name('user.userlevel1.edit');
-    Route::put('/user/userlevel1/{id}', [UserLevel1Controller::class, 'update'])->name('user.userlevel1.update');
+// User Level 1 Routes
+Route::prefix('user/userlevel1')->name('user.userlevel1.')->group(function() {
+    Route::get('/', [UserLevel1Controller::class, 'index'])->name('index');
+    Route::get('/edit/{id}', [UserLevel1Controller::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [UserLevel1Controller::class, 'update'])->name('update');
 });
+
+// User Level 2 Routes
+Route::prefix('user/userlevel2')->name('user.userlevel2.')->group(function() {
+    Route::get('/', [UserLevel2Controller::class, 'index'])->name('index');
+    Route::get('/edit/{id}', [UserLevel2Controller::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [UserLevel2Controller::class, 'update'])->name('update');
+    Route::put('/approve/{id}', [UserLevel2Controller::class, 'approve'])->name('approve');
+});
+
+// User Level 3 Routes
+Route::prefix('user/userlevel3')->name('user.userlevel3.')->group(function() {
+    Route::get('/', [UserLevel3Controller::class, 'index'])->name('index');
+    Route::get('/edit/{id}', [UserLevel3Controller::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [UserLevel3Controller::class, 'update'])->name('update');
+    Route::put('/approve/{id}', [UserLevel3Controller::class, 'approve'])->name('approve');
+});
+
